@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class MainViewModel:ViewModel() {
-
     private val _transactions = MutableLiveData<ArrayList<String>>()
     val transactions:MutableLiveData<ArrayList<String>> = _transactions
 
