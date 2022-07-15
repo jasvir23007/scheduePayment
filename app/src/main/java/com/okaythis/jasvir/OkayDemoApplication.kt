@@ -10,7 +10,9 @@ import com.okaythis.fccabstractcore.interfaces.parcel.Parcel
 import com.okaythis.fluttercommunicationchannel.fcc.FccApiImpl
 import com.protectoria.psa.PsaManager
 import com.protectoria.psa.dex.common.data.json.PsaGsonFactory
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class OkayDemoApplication: Application() {
 
     override fun onCreate() {

@@ -2,12 +2,33 @@ package com.okaythis.jasvir.data.repository
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.itransition.protectoria.psa_multitenant.data.SpaStorage
+import java.util.ArrayList
 
-class PreferenceRepo(context: Context): SpaStorage {
+class PreferenceRepo(context: Context) : SpaStorage {
 
     private val prefStorage: SharedPreferences =
         context.getSharedPreferences(PREFERENCE_KEY, Context.MODE_PRIVATE)
+
+
+    fun saveArrayList(list: ArrayList<String>?) {
+        // val prefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity)
+        val editor: SharedPreferences.Editor = prefStorage.edit()
+        val gson = Gson()
+        val json: String = gson.toJson(list)
+        editor.putString(LIST_TRANSACTIONS, json)
+        editor.apply()
+    }
+
+    fun getArrayList(): ArrayList<String> {
+        // val prefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity)
+        val gson = Gson()
+        val json: String? = prefStorage.getString(LIST_TRANSACTIONS, null)
+        val type = object : TypeToken<ArrayList<String>?>() {}.getType()
+        return gson.fromJson(json, type) ?: ArrayList()
+    }
 
 
     override fun getPubPssBase64(): String? {
@@ -65,6 +86,7 @@ class PreferenceRepo(context: Context): SpaStorage {
         return prefStorage.getString(EXTERNAL_ID, "")
     }
 
+
     companion object {
         const val PREFERENCE_KEY = "firebase_instance_id"
         const val APP_PNS = "app_pns"
@@ -72,5 +94,6 @@ class PreferenceRepo(context: Context): SpaStorage {
         const val PUB_PSS_B64 = "pub_pss_b64"
         const val ENROLLMENT_ID = "enrollment_id"
         const val INSTALLATION_ID = "installation_id"
+        const val LIST_TRANSACTIONS = "transaction_list"
     }
 }

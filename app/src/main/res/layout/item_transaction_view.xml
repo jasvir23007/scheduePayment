@@ -1,15 +1,17 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="@dimen/margin_medium"
-    android:layout_marginRight="@dimen/margin_medium"
+    android:layout_marginTop="1dp"
+    android:background="@color/colorBlueLight"
     android:gravity="center_vertical">
 
     <TextView
         android:id="@+id/tvTransaction"
         android:padding="10dp"
         android:textSize="16sp"
+
+        android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="test"/>
+        />
 </FrameLayout>

@@ -12,7 +12,7 @@ class OkayDemoFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onNewToken(token: String) {
         super.onNewToken(token)
-        token?.run {
+        token.run {
             PreferenceRepo(this@OkayDemoFirebaseMessagingService).putAppPNS(token)
         }
     }
@@ -22,11 +22,9 @@ class OkayDemoFirebaseMessagingService : FirebaseMessagingService() {
         if (remoteData.data.isNotEmpty()) {
             // handle notification
             val notificationData = NotificationHandler.extractRemoteData(remoteData)
-            Log.d("Firebase", "${notificationData!!.sessionId!!} ")
-
             startActivity(Intent(this, MainActivity::class.java).apply {
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                putExtra(ACTIVITY_WAKE_UP_KEY, notificationData.sessionId!!.toLong())
+                putExtra(ACTIVITY_WAKE_UP_KEY, notificationData?.sessionId!!.toLong())
             })
         }
     }
